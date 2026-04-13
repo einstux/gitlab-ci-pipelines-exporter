@@ -1,7 +1,7 @@
 NAME           := gitlab-ci-pipelines-exporter
 FILES          := $(shell git ls-files */*.go)
 COVERAGE_FILE  := coverage.out
-REPOSITORY     := mvisonneau/$(NAME)
+REPOSITORY     := einstux/$(NAME)
 .DEFAULT_GOAL  := help
 
 GOLANG_VERSION := 1.24
@@ -70,8 +70,8 @@ coverage-html: ## Generates coverage report and displays it in the browser
 .PHONY: dev-env
 dev-env: ## Build a local development environment using Docker
 	@docker run -it --rm \
-		-v $(shell pwd):/go/src/github.com/mvisonneau/$(NAME) \
-		-w /go/src/github.com/mvisonneau/$(NAME) \
+		-v $(shell pwd):/go/src/github.com/einstux/$(NAME) \
+		-w /go/src/github.com/einstux/$(NAME) \
 		-p 8080:8080 \
 		golang:$(GOLANG_VERSION) \
 		/bin/bash -c '\

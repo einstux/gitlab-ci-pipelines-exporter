@@ -444,7 +444,7 @@ func (r *Redis) PipelineVariablesExists(ctx context.Context, pipeline schemas.Pi
 
 // SetKeepalive sets a key with an UUID corresponding to the currently running process.
 func (r *Redis) SetKeepalive(ctx context.Context, uuid string, ttl time.Duration) (bool, error) {
-	return r.SetNX(ctx, fmt.Sprintf("%s:%s", redisKeepaliveKey, uuid), nil, ttl).Result()
+	return r.SetNX(ctx, fmt.Sprintf("%s:%s", redisKeepaliveKey, uuid), nil, ttl).Result() //nolint:staticcheck
 }
 
 // KeepaliveExists returns whether a keepalive exists or not for a particular UUID.
@@ -464,7 +464,7 @@ func (r *Redis) QueueTask(ctx context.Context, tt schemas.TaskType, taskUUID, pr
 	k := getRedisQueueKey(tt, taskUUID)
 
 	// We attempt to set the key, if it already exists, we do not overwrite it
-	set, err = r.SetNX(ctx, k, processUUID, 0).Result()
+	set, err = r.SetNX(ctx, k, processUUID, 0).Result() //nolint:staticcheck
 	if err != nil || set {
 		return
 	}
